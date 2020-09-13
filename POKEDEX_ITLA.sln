@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POKEDEX_ITLA", "POKEDEX_ITLA\POKEDEX_ITLA.csproj", "{D63E1091-0D6A-4D24-ACF7-520508D0BB37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "database", "database\database.csproj", "{C43C2BFD-0F6E-4CF3-B087-7729759C2391}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D63E1091-0D6A-4D24-ACF7-520508D0BB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D63E1091-0D6A-4D24-ACF7-520508D0BB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D63E1091-0D6A-4D24-ACF7-520508D0BB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D63E1091-0D6A-4D24-ACF7-520508D0BB37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43C2BFD-0F6E-4CF3-B087-7729759C2391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43C2BFD-0F6E-4CF3-B087-7729759C2391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43C2BFD-0F6E-4CF3-B087-7729759C2391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43C2BFD-0F6E-4CF3-B087-7729759C2391}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFA2EC40-AC38-4374-B1CD-ABAAA6EF42A0}
+	EndGlobalSection
+EndGlobal
