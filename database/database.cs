@@ -18,7 +18,7 @@ namespace database
             connection = new SqlConnection(connectionstring);
         }
 
-        #region servicios a tipos de pokemon
+        #region servicios a tipos 
         /*Aqui voy a poner todo lo relacionado con manejar los tipos de pokemos*/
         public void agregar_tipo(string nombre_tipo)
         {
@@ -106,6 +106,90 @@ namespace database
             connection.Close();
             return dt;
         }
+        #endregion
+
+        #region servicios pokemones
+        public List<repositorio_regiones> Getregiones()
+        {
+            List<repositorio_regiones> regiones = new List<repositorio_regiones>();
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM regiones",connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    regiones.Add(new repositorio_regiones
+                    {
+                        id = reader.GetInt32(0),
+                        region = reader.GetString(1)
+
+                    });
+                }
+            }
+
+            connection.Close();
+            return regiones;
+
+        }
+        public List<repositorio_tipos_pokemon> GetTipos_Pokemons()
+        {
+            List<repositorio_tipos_pokemon> tipos = new List<repositorio_tipos_pokemon>();
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM tipo_pokemon",connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    tipos.Add(new repositorio_tipos_pokemon
+                    {
+                        id = reader.GetInt32(0),
+                        tipo = reader.GetString(1)
+                    }) ;
+                }
+
+            }
+            connection.Close();
+            return tipos;
+        }
+
+        public void agregar_pokemon(repositorio_pokemon pokemon)
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("INSERT INTO pokemones VALUES (@nombre, @foto,"+
+                "@tipo1, @tipo2,@region )",connection);
+            command.Parameters.AddWithValue("@nombre",pokemon.nombre);
+            command.Parameters.AddWithValue("@foto",pokemon.foto);
+            command.Parameters.AddWithValue("@tipo1",pokemon.tipo1);
+            command.Parameters.AddWithValue("@tipo2",pokemon.tipo2);
+            command.Parameters.AddWithValue("@region",pokemon.region);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        public void editar_pokemon(int index, repositorio_pokemon pokemon)
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("UPDATE pokemones SET nombre = @nombre, foto = @foto,"
+                +"tipo1 = @tipo1, tipo2=@tipo2,region=@region WHERE id=@id",connection);
+            command.Parameters.AddWithValue("@id",index);
+            command.Parameters.AddWithValue("@nombre", pokemon.nombre);
+            command.Parameters.AddWithValue("@foto", pokemon.foto);
+            command.Parameters.AddWithValue("@tipo1", pokemon.tipo1);
+            command.Parameters.AddWithValue("@tipo2", pokemon.tipo2);
+            command.Parameters.AddWithValue("@region", pokemon.region);
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public void eliminar_pokemon(int index)
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("DELETE pokemones WHERE id=@id",connection);
+            command.Parameters.AddWithValue("@id",index);
+            command.ExecuteNonQuery();
+            connection.Close();
+
+        }
+
         #endregion
 
     }

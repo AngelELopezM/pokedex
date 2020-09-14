@@ -42,8 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="combobox\comboboxitem.cs" />
     <Compile Include="database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="repositorios\repositorio_pokemon.cs" />
+    <Compile Include="repositorios\repositorio_regiones.cs" />
+    <Compile Include="repositorios\repositorio_tipos_pokemon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

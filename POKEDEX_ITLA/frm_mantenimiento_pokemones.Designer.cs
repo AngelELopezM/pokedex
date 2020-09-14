@@ -206,6 +206,7 @@
             // cb_region
             // 
             this.cb_region.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_region.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_region.FormattingEnabled = true;
             this.cb_region.Location = new System.Drawing.Point(220, 174);
             this.cb_region.Name = "cb_region";
@@ -215,6 +216,7 @@
             // cb_tipo2
             // 
             this.cb_tipo2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_tipo2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_tipo2.FormattingEnabled = true;
             this.cb_tipo2.Location = new System.Drawing.Point(220, 117);
             this.cb_tipo2.Name = "cb_tipo2";
