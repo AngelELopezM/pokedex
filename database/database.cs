@@ -190,6 +190,40 @@ namespace database
 
         }
 
+        public DataTable Getpokemones()
+        {
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM pokemones", connection))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dt = new DataTable();
+
+                adapter.Fill(dt);
+                connection.Close();
+                return dt;
+            }
+
+
+            
+            
+        }
+        public int Getlastid()
+        {
+            /*esta funcion es para poder encontrar el id del ultimo pokemon agregado*/
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT MAX(id) FROM pokemones",connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    int id = reader.GetInt32(0);
+                    connection.Close();
+                    return id;
+                }
+            }
+            
+            
+        }
+
         #endregion
 
     }

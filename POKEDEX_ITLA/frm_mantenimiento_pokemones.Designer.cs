@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_mantenimiento_pokemones));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.btn_editar = new System.Windows.Forms.Button();
             this.btn_volver = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_cancelar = new System.Windows.Forms.Button();
+            this.dgv_pokemones = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_foto = new System.Windows.Forms.Button();
@@ -47,9 +49,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tb_nombre = new System.Windows.Forms.TextBox();
             this.cb_tipo1 = new System.Windows.Forms.ComboBox();
+            this.foto_pokemon = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pokemones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +64,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.11404F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.44298F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dgv_pokemones, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -80,15 +83,18 @@
             this.tableLayoutPanel3.Controls.Add(this.btn_agregar, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btn_eliminar, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.btn_editar, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btn_volver, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_volver, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.btn_cancelar, 0, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(740, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowCount = 5;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.01422F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.74882F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(318, 270);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
@@ -100,7 +106,7 @@
             this.btn_agregar.ForeColor = System.Drawing.Color.White;
             this.btn_agregar.Location = new System.Drawing.Point(3, 3);
             this.btn_agregar.Name = "btn_agregar";
-            this.btn_agregar.Size = new System.Drawing.Size(312, 61);
+            this.btn_agregar.Size = new System.Drawing.Size(312, 47);
             this.btn_agregar.TabIndex = 0;
             this.btn_agregar.Text = "AGREGAR ";
             this.btn_agregar.UseVisualStyleBackColor = false;
@@ -110,9 +116,9 @@
             this.btn_eliminar.BackColor = System.Drawing.Color.White;
             this.btn_eliminar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_eliminar.Location = new System.Drawing.Point(3, 137);
+            this.btn_eliminar.Location = new System.Drawing.Point(3, 109);
             this.btn_eliminar.Name = "btn_eliminar";
-            this.btn_eliminar.Size = new System.Drawing.Size(312, 61);
+            this.btn_eliminar.Size = new System.Drawing.Size(312, 51);
             this.btn_eliminar.TabIndex = 2;
             this.btn_eliminar.Text = "ELIMINAR";
             this.btn_eliminar.UseVisualStyleBackColor = false;
@@ -123,9 +129,9 @@
             this.btn_editar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_editar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editar.ForeColor = System.Drawing.Color.White;
-            this.btn_editar.Location = new System.Drawing.Point(3, 70);
+            this.btn_editar.Location = new System.Drawing.Point(3, 56);
             this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(312, 61);
+            this.btn_editar.Size = new System.Drawing.Size(312, 47);
             this.btn_editar.TabIndex = 1;
             this.btn_editar.Text = "EDITAR";
             this.btn_editar.UseVisualStyleBackColor = false;
@@ -136,24 +142,35 @@
             this.btn_volver.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_volver.ForeColor = System.Drawing.Color.Black;
-            this.btn_volver.Location = new System.Drawing.Point(3, 204);
+            this.btn_volver.Location = new System.Drawing.Point(3, 214);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(312, 63);
+            this.btn_volver.Size = new System.Drawing.Size(312, 53);
             this.btn_volver.TabIndex = 3;
             this.btn_volver.Text = "VOLVER";
             this.btn_volver.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // btn_cancelar
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 3);
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 279);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1055, 271);
-            this.dataGridView1.TabIndex = 0;
+            this.btn_cancelar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancelar.Location = new System.Drawing.Point(3, 166);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(312, 42);
+            this.btn_cancelar.TabIndex = 4;
+            this.btn_cancelar.Text = "Cancelar";
+            this.btn_cancelar.UseVisualStyleBackColor = true;
+            // 
+            // dgv_pokemones
+            // 
+            this.dgv_pokemones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableLayoutPanel1.SetColumnSpan(this.dgv_pokemones, 3);
+            this.dgv_pokemones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_pokemones.Location = new System.Drawing.Point(3, 279);
+            this.dgv_pokemones.Name = "dgv_pokemones";
+            this.dgv_pokemones.RowHeadersWidth = 51;
+            this.dgv_pokemones.RowTemplate.Height = 24;
+            this.dgv_pokemones.Size = new System.Drawing.Size(1055, 271);
+            this.dgv_pokemones.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -202,6 +219,7 @@
             this.btn_foto.TabIndex = 9;
             this.btn_foto.Text = "Insertar foto";
             this.btn_foto.UseVisualStyleBackColor = true;
+            this.btn_foto.Click += new System.EventHandler(this.btn_foto_Click);
             // 
             // cb_region
             // 
@@ -285,6 +303,7 @@
             // cb_tipo1
             // 
             this.cb_tipo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_tipo1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_tipo1.FormattingEnabled = true;
             this.cb_tipo1.Location = new System.Drawing.Point(220, 60);
             this.cb_tipo1.Name = "cb_tipo1";
@@ -298,11 +317,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(1061, 553);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_mantenimiento_pokemones";
-            this.Text = "table";
+            this.Text = "POKEDEX";
+            this.Load += new System.EventHandler(this.frm_mantenimiento_pokemones_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pokemones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -313,7 +334,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_pokemones;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btn_foto;
@@ -331,5 +352,7 @@
         private System.Windows.Forms.Button btn_eliminar;
         private System.Windows.Forms.Button btn_editar;
         private System.Windows.Forms.Button btn_volver;
+        private System.Windows.Forms.Button btn_cancelar;
+        private System.Windows.Forms.OpenFileDialog foto_pokemon;
     }
 }

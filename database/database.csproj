@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="combobox\comboboxitem.cs" />
+    <Compile Include="comboboxmodel\comboboxitem.cs" />
     <Compile Include="database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="repositorios\repositorio_pokemon.cs" />
