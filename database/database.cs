@@ -62,6 +62,24 @@ namespace database
             connection.Close();
             return dt;
         }
+        public bool verificar_tipo_en_uso(int id_tipo)
+        {
+            /*Esto aqui lo vamos a utilizar para verificar si la region que queremos eliminar esta siendo
+             utilizada por algun poquemon, si retorna un verdadero entonces no debemos permitir que el usuario
+             borre la region*/
+            connection.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM pokemones WHERE tipo1 = @id or tipo2=@id", connection);
+            command.Parameters.AddWithValue("@id", id_tipo);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                connection.Close();
+                return true;
+            }
+
+            connection.Close();
+            return false;
+        }
         #endregion
 
         #region sevicios a regiones
@@ -92,6 +110,24 @@ namespace database
             command.Parameters.AddWithValue("@id_region",index);
             command.ExecuteNonQuery();
             connection.Close();
+        }
+        public bool verificar_region_en_uso(int id_region)
+        {
+            /*Esto aqui lo vamos a utilizar para verificar si la region que queremos eliminar esta siendo
+             utilizada por algun poquemon, si retorna un verdadero entonces no debemos permitir que el usuario
+             borre la region*/
+            connection.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM pokemones WHERE region = @id", connection);
+            command.Parameters.AddWithValue("@id",id_region);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                connection.Close();
+                return true;
+            }
+
+            connection.Close();
+            return false;
         }
         public DataTable Get_reion()
         {
@@ -152,17 +188,57 @@ namespace database
             return tipos;
         }
 
+        public int Getid_pokemon(string nombre)
+        {
+            /*Aqui conseguimos el id del pokemon que hemos seleccionado para poder realizar las ediciones*/
+            connection.Open();
+            SqlCommand command = new SqlCommand("SELECT id FROM pokemones WHERE nombre=@nombre", connection);
+            command.Parameters.AddWithValue("@nombre",nombre);
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                int id = reader.GetInt32(0);
+                connection.Close();
+                return id;
+
+            
+            
+        }
+        public string Get_foto(int index)
+        {
+            /*Esto lo utilizamos para jalar el destino de la imagen que tenemos guardada desde la BD
+             y despues pasarsela al picture box para que la cargue*/
+            connection.Open();
+            SqlCommand command = new SqlCommand("select foto from pokemones where id=@id",connection);
+            command.Parameters.AddWithValue("@id",index);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            string destination = reader.GetString(0);
+
+            connection.Close();
+            return destination;
+        }
         public void agregar_pokemon(repositorio_pokemon pokemon)
         {
             connection.Open();
             SqlCommand command = new SqlCommand("INSERT INTO pokemones VALUES (@nombre, @foto,"+
                 "@tipo1, @tipo2,@region )",connection);
             command.Parameters.AddWithValue("@nombre",pokemon.nombre);
-            command.Parameters.AddWithValue("@foto",pokemon.foto);
+            command.Parameters.AddWithValue("@foto","");
             command.Parameters.AddWithValue("@tipo1",pokemon.tipo1);
             command.Parameters.AddWithValue("@tipo2",pokemon.tipo2);
             command.Parameters.AddWithValue("@region",pokemon.region);
             command.ExecuteNonQuery();
+            connection.Close();
+        }
+        public void guardar_foto(int id, string destination)
+        {
+            /*Este es para guardar la foto del pokemon en la base de datos*/
+            connection.Open();
+            SqlCommand command = new SqlCommand("UPDATE pokemones SET foto = @foto WHERE id=@id", connection);
+            command.Parameters.AddWithValue("@id",id);
+            command.Parameters.AddWithValue("@foto",destination);
+            command.ExecuteNonQuery();
+
             connection.Close();
         }
         public void editar_pokemon(int index, repositorio_pokemon pokemon)
@@ -193,7 +269,7 @@ namespace database
         public DataTable Getpokemones()
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM pokemones", connection))
+            using (SqlCommand command = new SqlCommand("EXEC ST_getpokemones", connection))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dt = new DataTable();
@@ -215,6 +291,7 @@ namespace database
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
+                    reader.Read();
                     int id = reader.GetInt32(0);
                     connection.Close();
                     return id;

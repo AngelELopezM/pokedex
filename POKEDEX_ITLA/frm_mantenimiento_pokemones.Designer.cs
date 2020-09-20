@@ -110,6 +110,7 @@
             this.btn_agregar.TabIndex = 0;
             this.btn_agregar.Text = "AGREGAR ";
             this.btn_agregar.UseVisualStyleBackColor = false;
+            this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
             // 
             // btn_eliminar
             // 
@@ -122,6 +123,7 @@
             this.btn_eliminar.TabIndex = 2;
             this.btn_eliminar.Text = "ELIMINAR";
             this.btn_eliminar.UseVisualStyleBackColor = false;
+            this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
             // btn_editar
             // 
@@ -135,6 +137,7 @@
             this.btn_editar.TabIndex = 1;
             this.btn_editar.Text = "EDITAR";
             this.btn_editar.UseVisualStyleBackColor = false;
+            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
             // 
             // btn_volver
             // 
@@ -159,18 +162,28 @@
             this.btn_cancelar.TabIndex = 4;
             this.btn_cancelar.Text = "Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
             // dgv_pokemones
             // 
+            this.dgv_pokemones.AllowUserToAddRows = false;
+            this.dgv_pokemones.AllowUserToDeleteRows = false;
+            this.dgv_pokemones.AllowUserToResizeColumns = false;
+            this.dgv_pokemones.AllowUserToResizeRows = false;
+            this.dgv_pokemones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_pokemones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dgv_pokemones, 3);
             this.dgv_pokemones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_pokemones.Location = new System.Drawing.Point(3, 279);
+            this.dgv_pokemones.MultiSelect = false;
             this.dgv_pokemones.Name = "dgv_pokemones";
+            this.dgv_pokemones.ReadOnly = true;
             this.dgv_pokemones.RowHeadersWidth = 51;
             this.dgv_pokemones.RowTemplate.Height = 24;
+            this.dgv_pokemones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_pokemones.Size = new System.Drawing.Size(1055, 271);
             this.dgv_pokemones.TabIndex = 0;
+            this.dgv_pokemones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_pokemones_CellDoubleClick);
             // 
             // pictureBox1
             // 

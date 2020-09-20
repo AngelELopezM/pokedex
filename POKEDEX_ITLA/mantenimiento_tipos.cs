@@ -63,9 +63,21 @@ namespace POKEDEX_ITLA
         
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            eliminar();
-            Load_grid();
-            dgv_tipos.ClearSelection();
+            bool tipo_en_uso = servicios.verificar_tipo_en_uso(id);
+            if (tipo_en_uso == true)
+            {
+                MessageBox.Show("Este tipo de pokemon esta siendo utilizado, no lo puede eliminar");
+                deshabilitar_botones();
+                dgv_tipos.ClearSelection();
+                tb_nombre_tipo.Clear();
+            }
+            else
+            {
+                eliminar();
+                Load_grid();
+                dgv_tipos.ClearSelection();
+            }
+            
         }
         private void dgv_tipos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

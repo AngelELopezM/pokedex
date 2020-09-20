@@ -72,15 +72,25 @@ namespace POKEDEX_ITLA
         }
         private void btn_eliminar_Click(object sender, EventArgs e)
         {
-            string region = tb_nombre_region.Text;
-            var opcion =  MessageBox.Show("Seguro que desea eliminar la region "+ region,"", MessageBoxButtons.YesNo);
-            if (opcion == DialogResult.Yes)
+            bool region_en_uso = servicios.verificar_region_en_uso(id_region);
+            if (region_en_uso == true)
             {
-                eliminar();
-                MessageBox.Show("Region eliminada");
+                MessageBox.Show("Esta region no puede ser eliminada porque esta en uso");
                 deshabilitar_botones();
-                Load_grid();
             }
+            else
+            {
+                string region = tb_nombre_region.Text;
+                var opcion = MessageBox.Show("Seguro que desea eliminar la region " + region, "", MessageBoxButtons.YesNo);
+                if (opcion == DialogResult.Yes)
+                {
+                    eliminar();
+                    MessageBox.Show("Region eliminada");
+                    deshabilitar_botones();
+                    Load_grid();
+                }
+            }
+            
         }
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
